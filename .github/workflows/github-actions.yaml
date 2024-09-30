@@ -5,13 +5,10 @@ on: [push]
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-      id-token: write
-      pull-requests: write
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # This line is important for getting all history for all branches and tags
 
       - name: Generate version number
         id: version
@@ -36,11 +33,12 @@ jobs:
 
       - name: Commit files
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git commit -am "Bump version to ${{ steps.version.outputs.VERSION }}"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAT }}
+          branch: ${{ github.ref }}
