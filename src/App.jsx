@@ -4,7 +4,7 @@ function App() {
   return (
     <div>
       <h1>testing auto mation </h1>
-      <h2>hello</h2>
+      <h2>hello version 2</h2>
     </div>
   );
 }
