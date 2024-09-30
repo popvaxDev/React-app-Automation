@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: react-app
-          image: dockerpopvaxtanul/dockerreact:v1
+          image: dockerpopvaxtanul/dockerreact:1.0.3
           ports:
             - containerPort: 8080
 
